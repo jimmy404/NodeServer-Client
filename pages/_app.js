@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import React from 'react';
+import Layout from '../components/Layout';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+const Login = () => {
+  return(
+    <Layout>
+      <h1>Login</h1>
+    </Layout>
+  );
 }
 
-export default MyApp
+export default Login;
