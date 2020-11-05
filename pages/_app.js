@@ -1,12 +1,5 @@
-import React from 'react';
-import Layout from '../components/Layout';
-
-const Login = () => {
-  return(
-    <Layout>
-      <h1>Login</h1>
-    </Layout>
-  );
+function MyApp({ Component, pageProps }) {
+    return <Component {...pageProps} />
 }
 
-export default Login;
+export default MyApp
