@@ -23,6 +23,35 @@ const CreateAccount = () => {
                                     placeholder="Username"
                                 />
                             </div>
+                            <div className="mb-4">
+                                <label
+                                    className="block text-black text-sm font-bold mb-2"
+                                    htmlFor="email"
+                                >Email</label>
+                                <input
+                                    type="email"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="email"
+                                    placeholder="Email"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    className="block text-black text-sm font-bold mb-2"
+                                    htmlFor="password"
+                                >Password</label>
+                                <input
+                                    type="password"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="password"
+                                    placeholder="Password"
+                                />
+                            </div>
+                            <input
+                                type="submit"
+                                className="bg-red-500 hover:bg-gray-900 w-full p-2 text-white uppercase font-bold"
+                                value="Create Account"
+                            />
                         </form>
                     </div>
                 </div>
