@@ -19,7 +19,7 @@ const CreateAccount = () => {
                 .required('The email is required'),
             password: Yup.string()
                 .required('The password field cannot be empty')
-                .min(6, 'Password must be at least 8 characters long'),
+                .min(8, 'Password must be at least 8 characters long'),
         }),
         onSubmit: (values) => {
             console.log(values)
