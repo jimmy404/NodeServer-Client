@@ -5,7 +5,8 @@ import authReducer from './authReducer';
 import {
   SUCCESSFULL_REGISTRATION,
   ERROR_REGISTRATION,
-  CLEAN_ALERT
+  CLEAN_ALERT,
+  LOGIN_ERROR
 } from '../../types';
 
 import clienteAxios from '../../config/axios';
@@ -50,7 +51,20 @@ const AuthState = ({children}) => {
   }
 
   const logIn = async data => {
-    console.log(data)
+    try {
+      const response = await clienteAxios.post('/api/auth', data);
+      console.log(response)
+    } catch (error) {
+      dispath({
+        type: LOGIN_ERROR,
+        payload: error.response.data.msg
+      })
+    }
+    setTimeout(() => {
+      dispath({
+        type: CLEAN_ALERT
+      })
+    }, 3000);
   }
 
   return(
