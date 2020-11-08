@@ -15,6 +15,10 @@ const AuthState = ({children}) => {
 
   const [ state, dispath ] = useReducer(authReducer, initialState);
 
+  const registerUser = data => {
+    console.log(data)
+  }
+
   const authenticatedUser = name => {
     dispath({
       type: AUTHENTICATED_USER,
@@ -29,6 +33,7 @@ const AuthState = ({children}) => {
         authenticated: state.authenticated,
         user: state.user,
         message: state.message,
+        registerUser,
         authenticatedUser
       }}
     >

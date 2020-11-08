@@ -7,8 +7,7 @@ import authContext from '../context/auth/authContext';
 const CreateAccount = () => {
 
     const AuthContext = useContext(authContext);
-    const { authenticatedUser, token } = AuthContext;
-    console.log(token)
+    const { registerUser } = AuthContext;
 
     const formik = useFormik({
         initialValues: {
@@ -27,7 +26,7 @@ const CreateAccount = () => {
                 .min(8, 'Password must be at least 8 characters long'),
         }),
         onSubmit: (values) => {
-            console.log(values)
+            registerUser(values)
         }
     });
 
