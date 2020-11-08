@@ -49,6 +49,10 @@ const AuthState = ({children}) => {
     })
   }
 
+  const logIn = async data => {
+    console.log(data)
+  }
+
   return(
     <authContext.Provider
       value={{
@@ -57,7 +61,8 @@ const AuthState = ({children}) => {
         user: state.user,
         message: state.message,
         registerUser,
-        authenticatedUser
+        authenticatedUser,
+        logIn
       }}
     >
       {children}
