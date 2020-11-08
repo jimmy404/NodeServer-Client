@@ -6,6 +6,7 @@ import {
   SUCCESSFULL_REGISTRATION,
   ERROR_REGISTRATION,
   CLEAN_ALERT,
+  LOGIN_SUCCESS,
   LOGIN_ERROR
 } from '../../types';
 
@@ -14,10 +15,11 @@ import clienteAxios from '../../config/axios';
 const AuthState = ({children}) => {
 
   const initialState = {
-    token: '',
+    token: typeof window !== 'undefined' ? localStorage.getItem('token') : '',
     authenticated: null,
     user: null,
-    message: null
+    message: null,
+    loading: null
   }
 
   const [ state, dispath ] = useReducer(authReducer, initialState);
@@ -53,7 +55,10 @@ const AuthState = ({children}) => {
   const logIn = async data => {
     try {
       const response = await clienteAxios.post('/api/auth', data);
-      console.log(response)
+      dispath({
+        type: LOGIN_SUCCESS,
+        payload: response.data.token
+      })
     } catch (error) {
       dispath({
         type: LOGIN_ERROR,
@@ -74,6 +79,7 @@ const AuthState = ({children}) => {
         authenticated: state.authenticated,
         user: state.user,
         message: state.message,
+        loading: state.loading,
         registerUser,
         authenticatedUser,
         logIn
