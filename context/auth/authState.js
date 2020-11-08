@@ -2,7 +2,11 @@ import React, { useReducer } from 'react';
 import authContext from './authContext';
 import authReducer from './authReducer';
 
-import { SUCCESSFULL_REGISTRATION } from '../../types';
+import {
+  SUCCESSFULL_REGISTRATION,
+  ERROR_REGISTRATION,
+  CLEAN_ALERT
+} from '../../types';
 
 import clienteAxios from '../../config/axios';
 
@@ -23,10 +27,19 @@ const AuthState = ({children}) => {
       dispath({
         type: SUCCESSFULL_REGISTRATION,
         payload: response.data.msg
-      })
+      });
+
     } catch (error) {
-      console.log(error);
+      dispath({
+        type: ERROR_REGISTRATION,
+        payload: error.response.data.msg
+      });
     }
+    setTimeout(() => {
+      dispath({
+        type: CLEAN_ALERT
+      })
+    }, 3000);
   }
 
   const authenticatedUser = name => {
