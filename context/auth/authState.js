@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import authContext from './authContext';
 import authReducer from './authReducer';
 
-import { AUTHENTICATED_USER } from '../../types';
+import { SUCCESSFULL_REGISTRATION } from '../../types';
 
 import clienteAxios from '../../config/axios';
 
@@ -20,7 +20,10 @@ const AuthState = ({children}) => {
   const registerUser = async data => {
     try {
       const response = await clienteAxios.post('/api/users', data);
-      console.log(response);
+      dispath({
+        type: SUCCESSFULL_REGISTRATION,
+        payload: response.data.msg
+      })
     } catch (error) {
       console.log(error);
     }
