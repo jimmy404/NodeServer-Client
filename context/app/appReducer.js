@@ -9,6 +9,11 @@ import {
 
 export default (state, action) => {
   switch (action.type) {
+    case SHOW_ALERT:
+      return {
+        ...state,
+        message_file: action.payload
+      }
 
     default:
       return state;

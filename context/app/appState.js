@@ -11,10 +11,25 @@ import {
 } from '../../types';
 
 const AppState = ({children}) => {
+
+  const initialState = {
+    message_file: ''
+  }
+
+  const [ state, dispatch ] = useReducer( appReducer, initialState );
+
+  const showAlert = msg => {
+    dispatch({
+      type: SHOW_ALERT,
+      payload: msg
+    })
+  }
+
   return(
     <appContext.Provider
       value={{
-
+        message_file: state.message_file,
+        showAlert
       }}
     >
       {children}
