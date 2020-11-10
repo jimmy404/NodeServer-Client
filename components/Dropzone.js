@@ -1,12 +1,19 @@
+import Axios from 'axios';
 import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import clienteAxios from '../config/axios';
 
 const Dropzone = () => {
 
-  const onDrop = useCallback((acceptedFiles) => {
+  const onDrop = useCallback( async (acceptedFiles) => {
     console.log(acceptedFiles);
-  });
+
+    const formData = new FormData();
+    formData.append('file', acceptedFiles[0])
+
+    const result = await clienteAxios.post('/api/files', formData);
+    console.log(result)
+  }, []);
 
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({onDrop});
 
