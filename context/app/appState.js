@@ -13,7 +13,7 @@ import {
 const AppState = ({children}) => {
 
   const initialState = {
-    message_file: ''
+    message_file: null,
   }
 
   const [ state, dispatch ] = useReducer( appReducer, initialState );
@@ -22,7 +22,13 @@ const AppState = ({children}) => {
     dispatch({
       type: SHOW_ALERT,
       payload: msg
-    })
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: CLEAN_ALERT
+      })
+    }, 5000);
   }
 
   return(

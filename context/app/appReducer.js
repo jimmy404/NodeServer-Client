@@ -14,6 +14,11 @@ export default (state, action) => {
         ...state,
         message_file: action.payload
       }
+    case CLEAN_ALERT:
+      return {
+        ...state,
+        message_file: null
+      }
 
     default:
       return state;

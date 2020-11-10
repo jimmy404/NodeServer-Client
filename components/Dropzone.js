@@ -10,7 +10,7 @@ const Dropzone = () => {
   const { showAlert } = AppContext;
 
   const onDropRejected = () => {
-    showAlert('the file could not be uploaded');
+    showAlert('The file could not be uploaded. The limit is 1Mb. Get a free account to upload unlimited files and more.');
   }
 
   const onDropAccepted = useCallback( async (acceptedFiles) => {
