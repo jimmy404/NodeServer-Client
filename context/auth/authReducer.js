@@ -3,7 +3,9 @@ import {
   ERROR_REGISTRATION,
   CLEAN_ALERT,
   LOGIN_SUCCESS,
-  LOGIN_ERROR
+  LOGIN_ERROR,
+  AUTHENTICATED_USER,
+  LOG_OUT
 } from '../../types';
 
 export default (state, action) => {
@@ -23,9 +25,22 @@ export default (state, action) => {
         authenticated: true
       }
     case CLEAN_ALERT:
-      return{
+      return {
         ...state,
         message: null
+      }
+    case AUTHENTICATED_USER:
+      return {
+        ...state,
+        user: action.payload
+      }
+    case LOG_OUT:
+      localStorage.removeItem('token');
+      return {
+        ...state,
+        user: null,
+        token: null,
+        authenticated: null
       }
     default:
       return state;

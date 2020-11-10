@@ -7,10 +7,13 @@ import {
   ERROR_REGISTRATION,
   CLEAN_ALERT,
   LOGIN_SUCCESS,
-  LOGIN_ERROR
+  LOGIN_ERROR,
+  AUTHENTICATED_USER,
+  LOG_OUT
 } from '../../types';
 
 import clienteAxios from '../../config/axios';
+import tokenAuth from '../../config/tokenAuth';
 
 const AuthState = ({children}) => {
 
@@ -45,13 +48,6 @@ const AuthState = ({children}) => {
     }, 3000);
   }
 
-  const authenticatedUser = name => {
-    dispath({
-      type: AUTHENTICATED_USER,
-      payload: name
-    })
-  }
-
   const logIn = async data => {
     try {
       const response = await clienteAxios.post('/api/auth', data);
@@ -72,6 +68,32 @@ const AuthState = ({children}) => {
     }, 3000);
   }
 
+  const authenticatedUser = async () => {
+    const token = localStorage.getItem('token');
+    if(token){
+      tokenAuth(token);
+    }
+
+    try {
+      const response = await clienteAxios.get('/api/auth');
+        dispath({
+          type: AUTHENTICATED_USER,
+          payload: response.data.user
+        })
+    } catch (error) {
+      dispath({
+        type: LOGIN_ERROR,
+        payload: error.response.data.msg
+      })
+    }
+  }
+
+  const logOut = () => {
+    dispath({
+      type: LOG_OUT
+    })
+  }
+
   return(
     <authContext.Provider
       value={{
@@ -82,7 +104,8 @@ const AuthState = ({children}) => {
         loading: state.loading,
         registerUser,
         authenticatedUser,
-        logIn
+        logIn,
+        logOut
       }}
     >
       {children}

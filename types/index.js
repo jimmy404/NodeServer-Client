@@ -7,3 +7,4 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const CLEAN_ALERT = 'CLEAN_ALERT';
 
 export const AUTHENTICATED_USER = 'AUTHENTICATED_USER';
+export const LOG_OUT = 'LOG_OUT';
