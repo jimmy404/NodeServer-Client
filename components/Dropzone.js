@@ -7,20 +7,18 @@ import appContext from '../context/app/appContext';
 const Dropzone = () => {
 
   const AppContext = useContext(appContext);
-  const { showAlert } = AppContext;
+  const { showAlert, uploadFile, loading } = AppContext;
 
   const onDropRejected = () => {
     showAlert('The file could not be uploaded. The limit is 1Mb. Get a free account to upload unlimited files and more.');
   }
 
   const onDropAccepted = useCallback( async (acceptedFiles) => {
-    console.log(acceptedFiles);
 
     const formData = new FormData();
     formData.append('file', acceptedFiles[0])
 
-    const result = await clienteAxios.post('/api/files', formData);
-    console.log(result)
+    uploadFile(formData, acceptedFiles[0].path);
   }, []);
 
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({ onDropAccepted, onDropRejected, maxSize: 1000000 });
@@ -44,13 +42,16 @@ const Dropzone = () => {
           <ul>
             {files}
           </ul>
-          <button
-            type="button"
-            className="bg-blue-700 w-full py-3 rounded-lg text-white my-10 hover:bg-blue-800"
-            onClick={ () => createLink() }
-          >
-            Create Link
-          </button>
+          { loading
+            ? <p className="my-10 text-center text-gray-600">Loading file...</p>
+            : (<button
+              type="button"
+              className="bg-blue-700 w-full py-3 rounded-lg text-white my-10 hover:bg-blue-800"
+              onClick={ () => createLink() }
+            >
+              Create Link
+            </button>) }
+
         </div>
       ) : (
         <div {...getRootProps({ className: 'dropzone w-full py-32' })}>
