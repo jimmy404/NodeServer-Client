@@ -7,7 +7,7 @@ import appContext from '../context/app/appContext';
 const Dropzone = () => {
 
   const AppContext = useContext(appContext);
-  const { showAlert, uploadFile, loading } = AppContext;
+  const { showAlert, uploadFile, loading, createLink } = AppContext;
 
   const onDropRejected = () => {
     showAlert('The file could not be uploaded. The limit is 1Mb. Get a free account to upload unlimited files and more.');
@@ -29,10 +29,6 @@ const Dropzone = () => {
       <p className="text-sm text-gray-500">{ (file.size / Math.pow(1024, 2)).toFixed(2) } Mb</p>
     </li>
   ));
-
-  const createLink = () => {
-    console.log('Creando enlace')
-  }
 
   return(
     <div className="md:flex-1 mb-3 mx-2 mt-16 lg:mt-0 flex flex-col items-center justify-center border-dashed border-gray-400 border-2 bg-gray-100 px-4">
