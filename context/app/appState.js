@@ -8,7 +8,8 @@ import {
   UPLOAD_FILE_SUCCESS,
   UPLOAD_FILE_ERROR,
   CREATE_LINK_SUCCESS,
-  CREATE_LINK_ERROR
+  CREATE_LINK_ERROR,
+  CLEAR_STATE
 } from '../../types';
 
 import clienteAxios from '../../config/axios';
@@ -86,6 +87,12 @@ const AppState = ({children}) => {
     }
   }
 
+  const clearState = () => {
+    dispatch({
+      type: CLEAR_STATE
+    })
+  }
+
   return(
     <appContext.Provider
       value={{
@@ -99,7 +106,8 @@ const AppState = ({children}) => {
         url: state.url,
         createLink,
         showAlert,
-        uploadFile
+        uploadFile,
+        clearState
       }}
     >
       {children}
