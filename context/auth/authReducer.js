@@ -32,7 +32,8 @@ export default (state, action) => {
     case AUTHENTICATED_USER:
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
+        authenticated: true
       }
     case LOG_OUT:
       localStorage.removeItem('token');
