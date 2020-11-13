@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Form = () => {
+
+  const [ havePassword, setHavePassword ] = useState(false);
+
   return(
     <div className="w-full mt-20">
       <div>
@@ -13,6 +16,23 @@ const Form = () => {
           <option value="20">20 Downloads</option>
         </select>
       </div>
+
+      <div className="mt-4">
+        <div className="flex justify-between items-center">
+          <label className="text-lg text-gray-80 mr-20">Protect with password</label>
+          <input
+            type="checkbox"
+            onChange={ () => setHavePassword(!havePassword) }
+          />
+        </div>
+        { havePassword ?
+          ( <input
+              type="password"
+              className="appearance-none w-full mt-2 bg-white border border-gray-400 text-black py-3 px-4 pr-8 rounded leading-none focus:outline-none focus:border-gray-500"
+            /> )
+          : null }
+      </div>
+
     </div>
   );
 }
