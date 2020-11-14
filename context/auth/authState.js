@@ -76,10 +76,13 @@ const AuthState = ({children}) => {
 
     try {
       const response = await clienteAxios.get('/api/auth');
+      if (response.data.user) {
         dispath({
           type: AUTHENTICATED_USER,
           payload: response.data.user
         })
+      }
+
     } catch (error) {
       dispath({
         type: LOGIN_ERROR,

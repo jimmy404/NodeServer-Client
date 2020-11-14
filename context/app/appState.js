@@ -9,7 +9,8 @@ import {
   UPLOAD_FILE_ERROR,
   CREATE_LINK_SUCCESS,
   CREATE_LINK_ERROR,
-  CLEAR_STATE
+  CLEAR_STATE,
+  ADD_PASSWORD
 } from '../../types';
 
 import clienteAxios from '../../config/axios';
@@ -93,6 +94,13 @@ const AppState = ({children}) => {
     })
   }
 
+  const addPassword = password => {
+    dispatch({
+      type: ADD_PASSWORD,
+      payload: password
+    })
+  }
+
   return(
     <appContext.Provider
       value={{
@@ -107,7 +115,8 @@ const AppState = ({children}) => {
         createLink,
         showAlert,
         uploadFile,
-        clearState
+        clearState,
+        addPassword
       }}
     >
       {children}
