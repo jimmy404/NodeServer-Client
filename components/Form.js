@@ -4,7 +4,7 @@ import appContext from '../context/app/appContext';
 const Form = () => {
 
   const AppContext = useContext(appContext);
-  const { addPassword } = AppContext;
+  const { addPassword, addDownloads } = AppContext;
 
   const [ havePassword, setHavePassword ] = useState(false);
 
@@ -12,7 +12,10 @@ const Form = () => {
     <div className="w-full mt-20">
       <div>
         <label className="text-lg text-gray-800">Remove after of:</label>
-        <select className="appereance-none w-full mt-2 bg-white border border-gray-400 text-black py-3 px-4 pr-8 rounded leading-none focus:outline-none focus:border-gray-500">
+        <select
+          className="appereance-none w-full mt-2 bg-white border border-gray-400 text-black py-3 px-4 pr-8 rounded leading-none focus:outline-none focus:border-gray-500"
+          onChange={ e => addDownloads(parseInt(e.target.value)) }
+        >
           <option value="" selected disabled>-- Select --</option>
           <option value="1">1 Download</option>
           <option value="5">5 Downloads</option>
