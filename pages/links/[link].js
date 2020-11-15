@@ -1,6 +1,7 @@
 import Layout from '../../components/Layout';
 import clienteAxios from '../../config/axios';
 import React, { useState } from 'react';
+import appContext from '../../context/app/appContext';
 
 export async function getServerSideProps({params}) {
   const { link } = params;
@@ -25,9 +26,19 @@ export async function getServerSidePaths() {
 
 export default ({link}) => {
   const [ havePassword, setHavePassword ] = useState(link.password);
+  const [ password, setPassword ] = useState('');
 
-  const checkPassword = e => {
+  const checkPassword = async e => {
     e.preventDefault();
+    const data = {
+      password
+    }
+    try {
+      const result = await clienteAxios.post(`/api/links/${link.link}`, data);
+      setHavePassword(result.data.password);
+    } catch (error) {
+      console.log(error.response.data.msg)
+    }
   }
 
   return(
@@ -52,6 +63,8 @@ export default ({link}) => {
                           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           id="password"
                           placeholder="Password link"
+                          value={password}
+                          onChange={ e => setPassword(e.target.value) }
                       />
                   </div>
                   <input
